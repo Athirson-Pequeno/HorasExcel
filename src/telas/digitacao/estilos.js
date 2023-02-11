@@ -6,7 +6,7 @@ const estilos = StyleSheet.create({
         flex:1
     },
     containerCabecalho:{
-        padding:12,
+        paddingHorizontal:8,
         flex:1
     },
     botaoOk:{
@@ -25,6 +25,27 @@ const estilos = StyleSheet.create({
     containerViewFlatlist:{
         paddingHorizontal:5,
         justifyContent:"center"
+    },
+    textoDia:{
+        fontSize:18,
+        marginLeft:3,
+        marginBottom:5
+    },
+    containerMenu:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center"
+    },
+    botaoGerar:{
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"grey",
+        borderRadius:6,
+        padding:10,
+        marginBottom:4
+    },
+    textoBotaoGerar:{
+        color:"#fff"
     }
     
 })

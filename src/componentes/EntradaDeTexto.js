@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextInput, StyleSheet, View, Text } from "react-native";
 
-export default function EntradaDeTexto({value, onChangeText, label, flex=1}){
+export default function EntradaDeTexto({value, onChangeText, label, flex=1, inputMode="text"}){
 
     const estilo = estilos(flex)
 
@@ -12,6 +12,8 @@ export default function EntradaDeTexto({value, onChangeText, label, flex=1}){
                 value={value}
                 onChangeText={onChangeText}
                 style={estilo.textInput}
+                inputMode={inputMode}
+                
             />
         </View>
     )

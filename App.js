@@ -1,11 +1,6 @@
-import { View } from 'react-native';
-import Digitacao from './src/telas/digitacao';
+import Rotas from "./src/rotas/Rotas";
 
 export default function App() {
-  
   return (
-    <View>
-      <Digitacao/>
-    </View>
-  );
-}
+      <Rotas/>
+);}

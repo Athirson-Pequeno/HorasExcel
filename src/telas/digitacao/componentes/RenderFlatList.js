@@ -16,12 +16,12 @@ export default function RenderFlatList({item}){
 const estilos = StyleSheet.create({
     texto:{
         flex:1,
-        borderLeftColor:"black",
+        borderLeftColor:"grey",
         borderLeftWidth:1,
-        borderRightColor:"black",
+        borderRightColor:"grey",
         borderRightWidth:1,
         paddingHorizontal:5,
-        borderBottomColor:"#00000033",
+        borderBottomColor:"grey",
         borderBottomWidth:1,
         textAlign:"center",
         fontSize:18,

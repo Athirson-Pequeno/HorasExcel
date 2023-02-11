@@ -16,7 +16,7 @@ export default function TopoTabela(){
 const estilos = StyleSheet.create({
     texto:{
         flex:1,
-        borderColor:"black",
+        borderColor:"grey",
         borderWidth:1,
         paddingHorizontal:5,
         textAlign:"center",
@@ -28,5 +28,6 @@ const estilos = StyleSheet.create({
         flexDirection:"row",
         flex:1,
         paddingHorizontal:12,
+        
     }
 })
