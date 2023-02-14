@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { TextInput, StyleSheet, View, Text } from "react-native";
 
-export default function EntradaDeTexto({value, onChangeText, label, flex=1, inputMode="text"}){
+export default function EntradaDeTexto({
+    value,
+    onChangeText, 
+    label,
+    flex=1, 
+    keyboardType="default", 
+    ref, 
+    refNext
+}){
 
     const estilo = estilos(flex)
+    
 
     return (
         <View style={estilo.containerTextInput}>
@@ -12,7 +21,7 @@ export default function EntradaDeTexto({value, onChangeText, label, flex=1, inpu
                 value={value}
                 onChangeText={onChangeText}
                 style={estilo.textInput}
-                inputMode={inputMode}
+                keyboardType={keyboardType}
                 
             />
         </View>

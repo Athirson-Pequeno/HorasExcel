@@ -46,6 +46,26 @@ const estilos = StyleSheet.create({
     },
     textoBotaoGerar:{
         color:"#fff"
+    },
+    textInput:{
+        fontSize:20,
+        justifyContent:"center",
+        marginTop:1,
+        flex:1
+        
+    },
+    containerTextInput:{
+        borderColor:"grey",
+        borderWidth:1,
+        flex:1,
+        borderRadius:6,
+        padding:5,
+        margin:3,
+    },
+    label:{
+        borderBottomColor:"grey",
+        borderBottomWidth:1,
+        fontSize:12
     }
     
 })

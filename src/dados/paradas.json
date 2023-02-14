@@ -1,0 +1,209 @@
+{
+    "dados":[
+            {
+                "descricao":"Selecione o código da parada -",
+                "codigo":"",
+                "id":40
+            },
+            {
+                "descricao":"Troca de programação",
+                "codigo":"11102",
+                "id":0
+            },
+            {
+                "descricao":"Troca de cepo",
+                "codigo":"11105",
+                "id":1
+            },
+            {
+                "descricao":"Manutenção não planejada",
+                "codigo":"11201",
+                "id":2
+            },
+            {
+                "descricao":"Lubrificação",
+                "codigo":"11202",
+                "id":3
+            },
+            {
+                "descricao":"Manutenção na subestação",
+                "codigo":"11301",
+                "id":4
+            },
+            {
+                "descricao":"Testes/Amostra",
+                "codigo":"11401",
+                "id":5
+            },
+            {
+                "descricao":"Preenchimento de check list",
+                "codigo":"11501",
+                "id":6
+            },
+            {
+                "descricao":"Pausa ativa",
+                "codigo":"11601",
+                "id":7
+            },
+            {
+                "descricao":"DDS/DDQ/Treinamento",
+                "codigo":"11701",
+                "id":8
+            },
+            {
+                "descricao":"Inventário",
+                "codigo":"11801",
+                "id":9
+            },        
+            {
+                "descricao":"Falha elétrica",
+                "codigo":"12101",
+                "id":10
+            },
+            {
+                "descricao":"Vazamento de óleo",
+                "codigo":"12107",
+                "id":11
+            },
+            {
+                "descricao":"Falha mecânica",
+                "codigo":"12110",
+                "id":12
+            },
+            {
+                "descricao":"Faca quebrada",
+                "codigo":"12114",
+                "id":13
+            },
+            {
+                "descricao":"Quebra do molde de escareação",
+                "codigo":"12118",
+                "id":14
+            },
+            {
+                "descricao":"Regulagem maquina",
+                "codigo":"12208",
+                "id":15
+            },
+            {
+                "descricao":"Falta de sola",
+                "codigo":"12317",
+                "id":16
+            },
+            {
+                "descricao":"Falta de etiqueta",
+                "codigo":"12322",
+                "id":17
+            },
+            {
+                "descricao":"Falta forquilha",
+                "codigo":"12323",
+                "id":18
+            },
+            {
+                "descricao":"Falta embalagem",
+                "codigo":"12324",
+                "id":19
+            },   
+            {
+                "descricao":"Falta mão de obra",
+                "codigo":"12402",
+                "id":20
+            },
+            {
+                "descricao":"Troca de turno",
+                "codigo":"12712",
+                "id":21
+            },
+            {
+                "descricao":"Atraso na rota",
+                "codigo":"12403",
+                "id":22
+            },
+            {
+                "descricao":"Atraso mão de obra",
+                "codigo":"12404",
+                "id":23
+            },
+            {
+                "descricao":"Falta de faca",
+                "codigo":"12504",
+                "id":24
+            },
+            {
+                "descricao":"Material casado errado",
+                "codigo":"12509",
+                "id":25
+            },
+            {
+                "descricao":"Falta de ar comprimido",
+                "codigo":"12706",
+                "id":26
+            },
+            {
+                "descricao":"Falta de energia",
+                "codigo":"12707",
+                "id":27
+            },
+            {
+                "descricao":"Refeição",
+                "codigo":"12710",
+                "id":28
+            },
+            {
+                "descricao":"Intervenção da segurança do trabalho",
+                "codigo":"12711",
+                "id":29
+            },
+            {
+                "descricao":"Embalagem danificada",
+                "codigo":"12719",
+                "id":30
+            },
+            {
+                "descricao":"Erro de programação",
+                "codigo":"12720",
+                "id":31
+            },
+            {
+                "descricao":"Partida de fábrica",
+                "codigo":"12721",
+                "id":32
+            },
+            {
+                "descricao":"Retrabalho",
+                "codigo":"31112",
+                "id":33
+            },
+            {
+                "descricao":"Material com bolha",
+                "codigo":"31113",
+                "id":34
+            },
+            {
+                "descricao":"Falta filete",
+                "codigo":"31114",
+                "id":35
+            },
+            {
+                "descricao":"Material encolhido",
+                "codigo":"31115",
+                "id":36
+            },
+            {
+                "descricao":"Material com expessura maior que o especificado",
+                "codigo":"31116",
+                "id":37
+            },
+            {
+                "descricao":"Material com arroz liso",
+                "codigo":"31123",
+                "id":38
+            },
+            {
+                "descricao":"Material machado",
+                "codigo":"31129",
+                "id":39
+            }
+        ]
+    }

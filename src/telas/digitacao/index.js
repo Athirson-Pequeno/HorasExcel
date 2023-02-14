@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRoute } from "@react-navigation/core";
-import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { adicionarParadasDB, buscarParadasPorData, criarTabelaParadas } from "../../servicos/database";
+import * as Clipboard from 'expo-clipboard';
 
-import EntradaDeTexto from "../../componentes/EntradaDeTexto";
 import RenderFlatList from "./componentes/RenderFlatList";
 import TopoTabela from "./componentes/TopoTabela";
 import estilos from "./estilos";
 import { gerarTXT } from "../../servicos/gerarTXT";
+import { Picker } from "@react-native-picker/picker";
+import paradasJson from "../../dados/paradas.json"
+
+
 
 export default function Digitacao(){
+
+    const ref1 = useRef()
+    const ref2 = useRef()
+    const ref3 = useRef()
+    const ref4 = useRef()
+    const ref5 = useRef()
+    
 
 
     useEffect(()=>{
@@ -42,10 +53,7 @@ export default function Digitacao(){
     const rota = useRoute()
     const {item} = rota.params
     const dataParada = item.data
-
     const [data, setData] = useState([])
-    
-
     const [parada, setParada] = useState({
         celula:"",
         horaInicio:"",
@@ -64,7 +72,11 @@ export default function Digitacao(){
 
     async function AdicionarParada(){
 
-    const horario = parseInt( parada.horaInicio.slice(0,-2) ) - 5    
+    let horario = parseInt( parada.horaInicio.slice(0,-2) ) - 5  
+    
+    if (!horario){
+        horario=""
+    }
 
     const paradaDB = JSON.stringify({...parada, horario})
     await adicionarParadasDB(dataParada, paradaDB)
@@ -84,12 +96,19 @@ export default function Digitacao(){
     
 
     setData(paradaPush)
-    
-    }
 
-    function gerarArquivo(){
-        gerarTXT(data)
-        Alert.alert("Arquivo gerado")
+    setParada({
+        celula:"",
+        horaInicio:"",
+        horaFim:"",
+        codParada:"",
+        obs:""
+    })}
+
+    async function gerarArquivo(){
+       await Clipboard.setStringAsync( gerarTXT(data))
+       Alert.alert("Copiado para area de transferencia")
+        
     }
 
     const Cabecalho =   
@@ -104,42 +123,94 @@ export default function Digitacao(){
             </TouchableOpacity>
         </View>
     <View style={estilos.containerCabecalhoRow}>
-        <EntradaDeTexto
-            label="celula"
+
+
+
+    <View style={estilos.containerTextInput}>
+        <Text style={estilos.label}>Cél.</Text>
+        <TextInput
             value={parada.celula}
+            style={estilos.textInput}
             onChangeText={text => alteraDados("celula", text, parada, setParada)}
-            inputMode={"numeric"}
-        />
-        <EntradaDeTexto
-            label="Hora inicio"
-            value={parada.horaInicio}
-            onChangeText={text => alteraDados("horaInicio", text, parada, setParada)}
-            inputMode={"numeric"}
-        />
-        <EntradaDeTexto
-            label="Hora fim"
-            value={parada.horaFim}
-            onChangeText={text => alteraDados("horaFim", text, parada, setParada)}
-            inputMode={"numeric"}
-        />
-        <EntradaDeTexto
-            label="Código"
-            value={parada.codParada}
-            onChangeText={text => alteraDados("codParada", text,  parada, setParada)}
-            inputMode={"numeric"}
+            keyboardType={"numeric"}
+            returnKeyType={"next"}
+            ref={ref1}
+            onSubmitEditing={()=>{ref2.current.focus()}}
         />
     </View>
+
+    <View style={[estilos.containerTextInput,{flex:2}]}>
+        <Text style={estilos.label}>Hora Inicío</Text>
+        <TextInput
+            value={parada.horaInicio}
+            style={estilos.textInput}
+            onChangeText={text => alteraDados("horaInicio", text, parada, setParada)}
+            keyboardType={"numeric"}
+            returnKeyType={"next"}
+            ref={ref2}
+            onSubmitEditing={()=>{ref3.current.focus()}}
+        />
+    </View>
+
+    <View style={[estilos.containerTextInput,{flex:2}]}>
+        <Text style={estilos.label}>Hora Fim</Text>
+        <TextInput
+            value={parada.horaFim}
+            style={estilos.textInput}
+            onChangeText={text => alteraDados("horaFim", text, parada, setParada)}
+            keyboardType={"numeric"}
+            returnKeyType={"next"}
+            ref={ref3}
+            onSubmitEditing={()=>{ref4.current.focus()}}
+        />
+    </View>
+
+    <View style={[estilos.containerTextInput,{flex:3, padding:0}]}>
+    <Text style={[estilos.label, {margin:5}]}>Cód.</Text>
+    
+    <View>
+        <Picker 
+
+        selectedValue={parada.codParada}
+        onValueChange={(itemSelecionado)=>{
+                alteraDados("codParada", itemSelecionado, parada, setParada)
+                
+                ref5.current.focus()
+            
+        }}
+        ref={ref4}>
+
+       
+        {paradasJson.dados.map((item)=>{return <Picker.Item  style={{fontSize:12}} label={item.codigo+" - "+item.descricao} value={item.codigo} key={item.id}/>})}
+        </Picker>
+    </View>
+    </View>
+
+
+
+    </View>
         <View style={{flexDirection:"row"}}>
-            <EntradaDeTexto
-                    label="Obs."
+        <View style={[estilos.containerTextInput,{flex:3}]}>
+            <Text style={estilos.label}>Obs</Text>
+                <TextInput
                     value={parada.obs}
-                    onChangeText={text => alteraDados("obs", text,  parada, setParada)}
-                    flex={3}
-                    inputMode={"text"}
-                />
+                    style={estilos.textInput}
+                    onChangeText={text => alteraDados("obs", text, parada, setParada)}
+                    keyboardType={"default"}
+                    returnKeyType={"next"}
+                    ref={ref5}
+                    onSubmitEditing={()=>{
+                        AdicionarParada()
+                        ref1.current.focus()
+                    }}
+            />
+        </View>
             <TouchableOpacity 
                 style={estilos.botaoOk}
-                onPress={()=>AdicionarParada()}
+                onPress={()=>{
+                    AdicionarParada()
+                    ref1.current.focus()}
+                }
             >
                 <Text style={estilos.textoBotao}>OK</Text>
             </TouchableOpacity>
@@ -157,6 +228,7 @@ export default function Digitacao(){
             data={data}
             renderItem={({item}) => (<RenderFlatList item={{...item}}/>)}
             keyExtractor={(item)=>item.id}  
+
         />
     </View>
 )}

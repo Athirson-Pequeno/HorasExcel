@@ -19,7 +19,7 @@ export default function Inicial({navigation}){
             const lista = await buscarDatas()
 
             if (lista){
-                setListaDatas(lista)
+                setListaDatas(lista.slice(0).reverse())
             }
         }
     
@@ -29,7 +29,10 @@ export default function Inicial({navigation}){
 
     async function adicionarData(){
         await adicionarDatas(data)
-        setListaDatas(await buscarDatas())
+        const lista = await buscarDatas()
+        setListaDatas(lista.slice(0).reverse())
+        setData("")
+        
     }
     
     const Cabecalho = (<View style={estilos.containerCabecalhoFlat}>
@@ -38,7 +41,7 @@ export default function Inicial({navigation}){
             value={data}
             onChangeText={texto => setData(texto)}
             flex={4}
-            inputMode={"numeric"}
+            keyboardType={"numeric"}
         />
         <TouchableOpacity 
             style={estilos.botao}
