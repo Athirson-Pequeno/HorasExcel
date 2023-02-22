@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { adicionarDatas, buscarDatas,criarTabela } from "../../servicos/database";
 
 import EntradaDeTexto from "../../componentes/EntradaDeTexto";
@@ -28,20 +28,39 @@ export default function Inicial({navigation}){
 
 
     async function adicionarData(){
-        await adicionarDatas(data)
-        const lista = await buscarDatas()
-        setListaDatas(lista.slice(0).reverse())
-        setData("")
+
+        if(data){
         
+        const datasSemID = []
+
+        listaDatas.forEach((item)=>{
+            datasSemID.push(item.data)
+        })
+        if (datasSemID.indexOf(data) > -1){
+            Alert.alert("A data que você está tentando adicionar já existe, digite outra data.")
+            setData("")
+        }else{
+            await adicionarDatas(data)
+            const lista = await buscarDatas()
+            setListaDatas(lista.slice(0).reverse())
+            setData("")
+        }
+    }else{
+        Alert.alert("O campo data está vazio, digite uma data para continuar.")
+    }
+            
+ 
     }
     
+
+
     const Cabecalho = (<View style={estilos.containerCabecalhoFlat}>
         <EntradaDeTexto
             label={"Adicionar dia"}
             value={data}
             onChangeText={texto => setData(texto)}
             flex={4}
-            keyboardType={"numeric"}
+            keyboardType={"numbers-and-punctuation"}
         />
         <TouchableOpacity 
             style={estilos.botao}

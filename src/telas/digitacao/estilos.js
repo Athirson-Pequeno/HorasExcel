@@ -48,7 +48,7 @@ const estilos = StyleSheet.create({
         color:"#fff"
     },
     textInput:{
-        fontSize:20,
+        fontSize:18 ,
         justifyContent:"center",
         marginTop:1,
         flex:1

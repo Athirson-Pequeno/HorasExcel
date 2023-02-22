@@ -67,3 +67,23 @@ export async function buscarParadasPorData(dataParada){
         })
     })
 }
+
+export async function atualizarParada(parada, id){
+    return new Promise((resolve)=>{
+        db.transaction((transacao)=>{
+            transacao.executeSql("UPDATE Paradas SET infos = ? WHERE id = ?;",[parada, id], () => {
+                resolve("Parada atualizada com sucesso")
+            })
+        })
+    })
+}
+
+export async function deletarParada(id){
+    return new Promise((resolve)=>{
+        db.transaction((transacao)=>{
+            transacao.executeSql("DELETE FROM Paradas WHERE id = ?",[id],()=>{
+                resolve("Parada deletada com sucesso")
+            })
+        })
+    })
+}

@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useRoute } from "@react-navigation/core";
 import { Alert, FlatList, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { adicionarParadasDB, buscarParadasPorData, criarTabelaParadas } from "../../servicos/database";
 import * as Clipboard from 'expo-clipboard';
+import { ModalVisivelContext } from "../../contexts/ModalVisivelContext";
 
 import RenderFlatList from "./componentes/RenderFlatList";
 import TopoTabela from "./componentes/TopoTabela";
@@ -10,10 +11,13 @@ import estilos from "./estilos";
 import { gerarTXT } from "../../servicos/gerarTXT";
 import { Picker } from "@react-native-picker/picker";
 import paradasJson from "../../dados/paradas.json"
+import ModalEdicao from "./componentes/ModalEdicao";
 
 
 
 export default function Digitacao(){
+
+    const { modalVisivel } = useContext(ModalVisivelContext)
 
     const ref1 = useRef()
     const ref2 = useRef()
@@ -21,6 +25,7 @@ export default function Digitacao(){
     const ref4 = useRef()
     const ref5 = useRef()
     
+    const [tamanhoFonte, setTamanhoFonte] = useState(10)
 
 
     useEffect(()=>{
@@ -48,7 +53,7 @@ export default function Digitacao(){
 
         }
         iniciar()
-    },[])
+    },[modalVisivel])
 
     const rota = useRoute()
     const {item} = rota.params
@@ -96,7 +101,7 @@ export default function Digitacao(){
     
 
     setData(paradaPush)
-
+    
     setParada({
         celula:"",
         horaInicio:"",
@@ -167,10 +172,10 @@ export default function Digitacao(){
 
     <View style={[estilos.containerTextInput,{flex:3, padding:0}]}>
     <Text style={[estilos.label, {margin:5}]}>Cód.</Text>
-    
     <View>
         <Picker 
-
+        onFocus={()=>setTamanhoFonte(16)}
+        onBlur={()=>setTamanhoFonte(10)}
         selectedValue={parada.codParada}
         onValueChange={(itemSelecionado)=>{
                 alteraDados("codParada", itemSelecionado, parada, setParada)
@@ -181,7 +186,7 @@ export default function Digitacao(){
         ref={ref4}>
 
        
-        {paradasJson.dados.map((item)=>{return <Picker.Item  style={{fontSize:12}} label={item.codigo+" - "+item.descricao} value={item.codigo} key={item.id}/>})}
+        {paradasJson.dados.map((item)=>{return <Picker.Item  style={{fontSize:tamanhoFonte}} label={item.codigo+" - "+item.descricao} value={item.codigo} key={item.id}/>})}
         </Picker>
     </View>
     </View>
@@ -197,7 +202,7 @@ export default function Digitacao(){
                     style={estilos.textInput}
                     onChangeText={text => alteraDados("obs", text, parada, setParada)}
                     keyboardType={"default"}
-                    returnKeyType={"next"}
+                    returnKeyType={"send"}
                     ref={ref5}
                     onSubmitEditing={()=>{
                         AdicionarParada()
@@ -230,5 +235,6 @@ export default function Digitacao(){
             keyExtractor={(item)=>item.id}  
 
         />
+        <ModalEdicao/>
     </View>
 )}
