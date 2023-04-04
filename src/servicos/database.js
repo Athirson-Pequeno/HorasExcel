@@ -4,30 +4,30 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase("db.db");
 
 
-export function criarTabela(){
+export function criarTabela(nomeTabela){
     db.transaction((transacao) =>{
-        transacao.executeSql("CREATE TABLE IF NOT EXISTS " +
-        "Datas " +
-        "(id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT);")
+        transacao.executeSql(`CREATE TABLE IF NOT EXISTS ${nomeTabela} (id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT);`)
 
-        console.log("tabela criada")
+       // console.log(`tabela ${nomeTabela} criada`)
     })
 }
 
-export async function adicionarDatas(data){
+export async function adicionarDatas(data, nomeTabela){
     return new Promise((resolve)=>{
         db.transaction((transacao)=>{
-            transacao.executeSql("INSERT INTO Datas (data) VALUES (?);",[data],() =>{
-                resolve("Data adicionada")
+            transacao.executeSql(`INSERT INTO ${nomeTabela} (data) VALUES (?);`,[data],() =>{
+               // console.log(`itam salvo na ${nomeTabela}`)
+                resolve(`Data adicionada na tabela ${nomeTabela}`)
             })
         })
     })
 }
 
-export async function buscarDatas(){
+export async function buscarDatas(nomeTabela){
     return new Promise((resolve)=>{
         db.transaction((transacao)=>{
-            transacao.executeSql("SELECT * FROM Datas;",[],(transacao, resultados)=>{
+            transacao.executeSql(`SELECT * FROM ${nomeTabela};`,[],(transacao, resultados)=>{
+              //  console.log(`buscando salvo na ${nomeTabela}`)
                 resolve(resultados.rows._array)
             })
         })
@@ -41,7 +41,7 @@ export function criarTabelaParadas(){
         "Paradas " +
         "(id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT, infos TEXT);")
 
-        console.log("tabela paradas criada")
+        
     })
 }
 
@@ -83,6 +83,55 @@ export async function deletarParada(id){
         db.transaction((transacao)=>{
             transacao.executeSql("DELETE FROM Paradas WHERE id = ?",[id],()=>{
                 resolve("Parada deletada com sucesso")
+            })
+        })
+    })
+}
+
+
+
+
+export function criarTabelaInutilizado(){
+    db.transaction((transacao) =>{
+        transacao.executeSql(`CREATE TABLE IF NOT EXISTS Inutilizado (id INTEGER PRIMARY KEY AUTOINCREMENT, dataEHorario TEXT, valores TEXT);`)
+
+    
+    })
+}
+
+export async function salvarInutilizado(dataEHorario, dadosInutilizado){
+    return new Promise((resolve)=>{
+        db.transaction((transacao)=>{
+            transacao.executeSql("INSERT INTO Inutilizado (dataEHorario, valores) VALUES (?, ?)",
+            [dataEHorario, dadosInutilizado],()=>{
+               
+                resolve("inutilizado salvo")
+            })
+        })
+    })
+
+}
+
+
+export async function buscarInutilizado(dataEHorario){
+    return new Promise((resolve)=>{
+        db.transaction((transacao)=>{
+            transacao.executeSql("SELECT * FROM Inutilizado WHERE dataEHorario = ?;",
+            [dataEHorario],(transacao, resultados)=>{
+                
+                resolve(resultados.rows._array)
+            })
+        })
+    })
+}
+
+
+export async function atualizarInutilizado(valores, dataEHorario){
+    return new Promise((resolve)=>{
+        db.transaction((transacao)=>{
+            transacao.executeSql("UPDATE Inutilizado SET valores = ? WHERE dataEHorario = ?;",[valores, dataEHorario], () => {
+               
+                resolve("Inutilizado atualizado com sucesso")
             })
         })
     })

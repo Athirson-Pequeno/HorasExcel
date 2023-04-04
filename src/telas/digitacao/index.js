@@ -111,7 +111,7 @@ export default function Digitacao(){
     })}
 
     async function gerarArquivo(){
-       await Clipboard.setStringAsync( gerarTXT(data))
+       await Clipboard.setStringAsync( gerarTXT(data) )
        Alert.alert("Copiado para area de transferencia")
         
     }

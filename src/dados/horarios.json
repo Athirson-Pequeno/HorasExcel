@@ -1,0 +1,40 @@
+{
+    "dados":[{
+                "descricao":"Acumulado",
+                "id":0
+            },
+            {
+                "descricao":"1º horário",
+                "id":1
+            },
+            {
+                "descricao":"2º horário",
+                "id":2
+            },
+            {
+                "descricao":"3º horário",
+                "id":3
+            },
+            {
+                "descricao":"4º horário",
+                "id":4
+            },
+            {
+                "descricao":"5º horário",
+                "id":5
+            },
+            {
+                "descricao":"6º horário",
+                "id":6
+            },
+            {
+                "descricao":"7º horário",
+                "id":7
+            },
+            {
+                "descricao":"8º horário",
+                "id":8
+            }
+
+        ]
+    }

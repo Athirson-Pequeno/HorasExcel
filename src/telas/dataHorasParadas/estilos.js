@@ -17,7 +17,19 @@ const estilos = StyleSheet.create({
         margin:3
     },
     textoBotao:{
-        color:"#fff"
+        color:"#000"
+    },
+    botaoFlat:{
+        backgroundColor:"#c0c0c0",
+        margin:2,
+        borderColor:"#545454",
+        borderWidth:2,
+        padding:6,
+        borderRadius:6
+    },
+    textoBotaoFlat:{
+        fontSize:22,
+        color:"#1d1d1d"
     }
 })
 
